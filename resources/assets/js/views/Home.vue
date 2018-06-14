@@ -1,13 +1,14 @@
 <template>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card card-default">
-                    <div class="card-header">HOme Page</div>
-
-                    <div class="card-body">
-                        I'm an example component.
+        <div class="columns">
+            <div class="column">
+                <div class="message" v-for="status in statuses">
+                    <div class="message-header">
+                        <p>{{ status.user.name }} said...</p>
+                        <p>{{ postedOn(status) }}</p>
                     </div>
+
+                    <div class="message-body" v-text="status.body"></div>
                 </div>
             </div>
         </div>
@@ -15,9 +16,27 @@
 </template>
 
 <script>
+    
+    import Moment from 'moment';
+    import Status from '../models/Status';
     export default {
-        mounted() {
-            //axios()... fetch data from database
+
+        data(){
+            return {
+                statuses : []
+            }
+        },
+        
+        created(){
+            
+                Status.all().then(({data}) => this.statuses = data);
+                // OR .then(response => this.statuses = response.data);
+        },
+        methods : {
+            postedOn(status) {
+                Moment.locale('ja');
+                return Moment(status.created_at).fromNow();
+            }
         }
     }
 </script>

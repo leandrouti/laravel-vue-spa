@@ -1,11 +1,11 @@
 <template>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card card-default">
-                    <div class="card-header">The About Page</div>
+        <div class="columns">
+            <div class="column">
+                <div class="message">
+                    <div class="message-header">The About Page</div>
 
-                    <div class="card-body">
+                    <div class="message-body">
                         I'm on the about page.
                     </div>
                 </div>

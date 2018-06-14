@@ -11,6 +11,14 @@
 |
 */
 
+use App\Status;
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/statuses', function () {
+    //dd(Status::first());
+    
+    return Status::with('user')->latest()->get();
 });
