@@ -10,6 +10,9 @@
 
                     <div class="message-body" v-text="status.body"></div>
                 </div>
+
+                <!-- add to stream -->
+                <AddToStream @completed="addStatus"></AddToStream>
             </div>
         </div>
     </div>
@@ -19,7 +22,11 @@
     
     import Moment from 'moment';
     import Status from '../models/Status';
+    import AddToStream from '../components/AddToStream';
     export default {
+        components : {
+            AddToStream,
+        },
 
         data(){
             return {
@@ -41,6 +48,14 @@
                 return value.toUpperCase();
             }
         },
+
+        methods : {
+            addStatus(data){
+                this.statuses.unshift(data);
+                alert ('Your status has been added to the stream.');
+                window.scroll(0,0);
+            }
+        }
         
     }
 </script>

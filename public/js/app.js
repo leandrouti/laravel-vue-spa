@@ -31066,8 +31066,10 @@ new Vue({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_router__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utilities_Forms__ = __webpack_require__(181);
 
 window.Vue = __webpack_require__(5);
+
 
 
 
@@ -31076,6 +31078,7 @@ window.Vue = __WEBPACK_IMPORTED_MODULE_0_vue___default.a;
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]);
 
 window.axios = __WEBPACK_IMPORTED_MODULE_1_axios___default.a;
+window.Forms = __WEBPACK_IMPORTED_MODULE_3__utilities_Forms__["a" /* default */];
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -32326,6 +32329,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_Status__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_AddToStream__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_AddToStream___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_AddToStream__);
 //
 //
 //
@@ -32343,11 +32348,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        AddToStream: __WEBPACK_IMPORTED_MODULE_2__components_AddToStream___default.a
+    },
+
     data: function data() {
         return {
             statuses: []
@@ -32370,6 +32383,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         capitalize: function capitalize(value) {
             return value.toUpperCase();
+        }
+    },
+
+    methods: {
+        addStatus: function addStatus(data) {
+            this.statuses.unshift(data);
+            alert('Your status has been added to the stream.');
+            window.scroll(0, 0);
         }
     }
 
@@ -32684,24 +32705,31 @@ var render = function() {
       _c(
         "div",
         { staticClass: "column" },
-        _vm._l(_vm.statuses, function(status) {
-          return _c("div", { staticClass: "message" }, [
-            _c("div", { staticClass: "message-header" }, [
-              _c("p", [_vm._v(_vm._s(status.user.name) + " said...")]),
+        [
+          _vm._l(_vm.statuses, function(status) {
+            return _c("div", { staticClass: "message" }, [
+              _c("div", { staticClass: "message-header" }, [
+                _c("p", [_vm._v(_vm._s(status.user.name) + " said...")]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    _vm._s(
+                      _vm._f("capitalize")(_vm._f("ago")(status.created_at))
+                    )
+                  )
+                ])
+              ]),
               _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  _vm._s(_vm._f("capitalize")(_vm._f("ago")(status.created_at)))
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", {
-              staticClass: "message-body",
-              domProps: { textContent: _vm._s(status.body) }
-            })
-          ])
-        })
+              _c("div", {
+                staticClass: "message-body",
+                domProps: { textContent: _vm._s(status.body) }
+              })
+            ])
+          }),
+          _vm._v(" "),
+          _c("AddToStream", { on: { completed: _vm.addStatus } })
+        ],
+        2
       )
     ])
   ])
@@ -32981,6 +33009,313 @@ var Status = function () {
 }();
 
 /* harmony default export */ __webpack_exports__["a"] = (Status);
+
+/***/ }),
+/* 178 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(179)
+/* template */
+var __vue_template__ = __webpack_require__(180)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\AddToStream.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-df750416", Component.options)
+  } else {
+    hotAPI.reload("data-v-df750416", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 179 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            form: new Forms({ body: '' })
+        };
+    },
+
+
+    methods: {
+        onSubmit: function onSubmit(data) {
+            var _this = this;
+
+            this.form.submit('post', '/statuses').then(function (status) {
+                return _this.$emit('completed', status);
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 180 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "message" }, [
+    _c("div", { staticClass: "message-header" }, [_vm._v("Push to Stream")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "message-body" }, [
+      _c(
+        "form",
+        {
+          attrs: { action: "/statuses", method: "post" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.onSubmit($event)
+            },
+            keydown: function($event) {
+              _vm.form.errors.clear()
+            }
+          }
+        },
+        [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.body,
+                expression: "form.body"
+              }
+            ],
+            staticClass: "textarea",
+            attrs: {
+              name: "body",
+              id: "",
+              placeholder: "I have something to say"
+            },
+            domProps: { value: _vm.form.body },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "body", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm.form.errors.has("body")
+            ? _c("span", {
+                staticClass: "help is-danger",
+                domProps: { textContent: _vm._s(_vm.form.errors.get("body")) }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _c("p", { staticClass: "control" }, [
+            _c(
+              "button",
+              {
+                staticClass: "button is-primary",
+                attrs: { type: "submit", disabled: _vm.form.errors.any() }
+              },
+              [_vm._v("Submit")]
+            )
+          ])
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-df750416", module.exports)
+  }
+}
+
+/***/ }),
+/* 181 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Errors__ = __webpack_require__(182);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var Forms = function () {
+    function Forms(data) {
+        _classCallCheck(this, Forms);
+
+        this.originalData = data;
+        this.errors = new __WEBPACK_IMPORTED_MODULE_0__Errors__["a" /* default */]();
+
+        for (var field in data) {
+            this[field] = data[field];
+        }
+    }
+
+    _createClass(Forms, [{
+        key: 'reset',
+        value: function reset() {
+            for (var field in this.originalData) {
+                this[field] = '';
+            }
+            this.errors.clear();
+        }
+    }, {
+        key: 'data',
+        value: function data() {
+            var data = {};
+
+            for (var property in this.originalData) {
+                data[property] = this[property];
+            }
+
+            return data;
+        }
+    }, {
+        key: 'submit',
+        value: function submit(requestType, url) {
+            var _this = this;
+
+            return new Promise(function (resolve, reject) {
+                axios[requestType](url, _this.data()).then(function (response) {
+                    _this.onSuccess(response.data);
+                    resolve(response.data);
+                }).catch(function (error) {
+                    console.log("on catch " + error);
+                    _this.onFail(error.response.data);
+                    reject(error.response.data);
+                });
+            });
+        }
+    }, {
+        key: 'onSuccess',
+        value: function onSuccess(response) {
+            this.reset();
+        }
+    }, {
+        key: 'onFail',
+        value: function onFail(errors) {
+            this.errors.record(errors.errors);
+        }
+    }]);
+
+    return Forms;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Forms);
+
+/***/ }),
+/* 182 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Errors = function () {
+    function Errors() {
+        _classCallCheck(this, Errors);
+
+        this.errors = {};
+    }
+
+    _createClass(Errors, [{
+        key: "get",
+        value: function get(field) {
+            if (this.errors[field]) {
+                return this.errors[field][0];
+            }
+        }
+    }, {
+        key: "record",
+        value: function record(errors) {
+            this.errors = errors;
+        }
+    }, {
+        key: "clear",
+        value: function clear(field) {
+            if (field) {
+                delete this.errors[field];
+            } else {
+                this.errors = {};
+            }
+        }
+    }, {
+        key: "has",
+        value: function has(field) {
+            return this.errors.hasOwnProperty(field);
+        }
+    }, {
+        key: "any",
+        value: function any() {
+            return Object.keys(this.errors).length > 0;
+        }
+    }]);
+
+    return Errors;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Errors);
 
 /***/ })
 /******/ ]);

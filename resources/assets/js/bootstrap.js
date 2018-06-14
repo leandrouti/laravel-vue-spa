@@ -3,12 +3,13 @@ window.Vue = require('vue');
 import Vue from 'vue';
 import axios from 'axios';
 import VueRouter from 'vue-router';
+import Forms from './utilities/Forms';
 
 window.Vue = Vue;
 Vue.use(VueRouter);
 
 window.axios = axios;
-
+window.Forms = Forms;
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
